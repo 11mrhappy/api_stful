@@ -41,12 +41,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Future<Connpass> futureAlbum;
+  Future<Connpass> futureConnpass;
 
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchConnpass();
+    futureConnpass = fetchConnpass();
   }
 
   @override
@@ -62,13 +62,15 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: FutureBuilder<Connpass>(
-            future: futureAlbum,
+            future: futureConnpass,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Text(snapshot.data.title);
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
+              print(snapshot.data.title);
+
               return CircularProgressIndicator();
             },
           ),
